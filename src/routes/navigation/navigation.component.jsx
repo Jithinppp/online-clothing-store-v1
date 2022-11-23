@@ -16,7 +16,7 @@ const Navigation = (props) => {
           <Link className="nav_item" to="contact">
             Contact
           </Link>
-          <Link className="nav_item" to="signin">
+          <Link className="nav_item" to="sign-in">
             Sign in
           </Link>
           <Link className="nav_item">
