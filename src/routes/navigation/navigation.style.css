@@ -1,0 +1,23 @@
+.navigation_container {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.main_logo {
+  margin: 0;
+  font-size: 1.4rem;
+  letter-spacing: 2px;
+  font-weight: 500;
+}
+.nav_items {
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: space-evenly;
+}
+.nav_item {
+  margin: 0 2rem;
+  font-size: 1.1rem;
+  font-weight: 400;
+}
