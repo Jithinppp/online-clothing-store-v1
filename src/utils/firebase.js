@@ -3,9 +3,10 @@
 import { initializeApp } from "firebase/app";
 import {
   getAuth,
-  signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 // similar to firebase/app for authentication import firestore to interact with firestore database
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
@@ -26,14 +27,28 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account",
 });
-// creating auth instance and signIn with popup
+// creating auth instance
 export const auth = getAuth();
+// sign-in with popup
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+// sign up with email and password or create account with email and password
+export const createAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await createUserWithEmailAndPassword(auth, email, password);
+};
+// sign in with email and password
+export const signInAuthUserWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+  return await signInWithEmailAndPassword(auth, email, password);
+};
 
 // initialize firestore database
 export const db = getFirestore();
 
-export const createUserDocumentFromAuth = async (userAuth) => {
+export const createUserDocumentFromAuth = async (
+  userAuth,
+  additionalData = {}
+) => {
   // this function create users collection in firestore that users logged in based on uid
   // 2.check weather an existing document is there based on the uid from the logged data (signInWithGooglePopup gives a user data having a uid there)
   // doc(1,2,3) 1-database, 2-collection name, 3-identifier
@@ -53,6 +68,7 @@ export const createUserDocumentFromAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalData,
       });
     } catch (error) {
       console.log("an error occurred cant create user ", error);

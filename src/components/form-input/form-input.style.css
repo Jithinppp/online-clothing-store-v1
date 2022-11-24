@@ -1,0 +1,13 @@
+.form-input {
+  width: 270px;
+  margin: 5px 0;
+  outline: none;
+  border: none;
+  border-radius: 2px;
+  height: 35px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.188);
+  padding: 3px;
+}
+.form-input::placeholder {
+  opacity: 0.8;
+}

@@ -1,0 +1,13 @@
+.sign_container {
+  display: grid;
+  margin-top: 1.5rem;
+  gap: 1rem;
+}
+
+/* media queries */
+
+@media only screen and (min-width: 600px) {
+  .sign_container {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
