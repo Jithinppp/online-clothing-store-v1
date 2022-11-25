@@ -8,6 +8,7 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   signOut,
+  onAuthStateChanged,
 } from "firebase/auth";
 // similar to firebase/app for authentication import firestore to interact with firestore database
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
@@ -33,7 +34,8 @@ export const auth = getAuth();
 
 // !interface functions
 // sign-in with popup
-export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
+export const signInWithGooglePopup = async () =>
+  await signInWithPopup(auth, provider);
 // sign up with email and password or create account with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
@@ -47,6 +49,11 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
 // signOut function
 export const signOutUser = async () => await signOut(auth);
 
+// auth state change function
+// onAuthStateChanged will listen any authentication instance and it persist the user data
+export const onAuthStateChangedListener = (callback) =>
+  onAuthStateChanged(auth, callback);
+
 // !database Functions
 // initialize firestore database
 export const db = getFirestore();
@@ -56,10 +63,11 @@ export const createUserDocumentFromAuth = async (
   additionalData = {}
 ) => {
   // this function create users collection in firestore that users logged in based on uid
-  // 2.check weather an existing document is there based on the uid from the logged data (signInWithGooglePopup gives a user data having a uid there)
+  // 2.check weather an existing document is there based on the uid from the logged data
+  // (signInWithGooglePopup gives a user data having a uid there)
   // doc(1,2,3) 1-database, 2-collection name, 3-identifier
   // users:{id:"234kj343h434o2ih42", name:"Jithin",age:22} this is a collection called users having an identifier id
-  //   give me the document under db -> users -> uid
+  // give me the document under db -> users -> uid or creating the path
   const userDocRef = doc(db, "users", userAuth.uid);
   //   console.log(userDocRef);
   const userSnapshot = await getDoc(userDocRef);

@@ -8,14 +8,7 @@ import shoppingBagIcon from "../../assets/images/shopping-bag.png";
 import { signOutUser } from "../../utils/firebase";
 
 const Navigation = (props) => {
-  const { currentUser, setCurrentUser } = useContext(UserContext);
-
-  // sign-out handler
-  const signOutHandler = async () => {
-    await signOutUser();
-    // after sign-out set the current user null
-    setCurrentUser(null);
-  };
+  const { currentUser } = useContext(UserContext);
   return (
     <Fragment>
       <nav className="navigation_container">
@@ -28,7 +21,7 @@ const Navigation = (props) => {
             Contact
           </Link>
           {currentUser ? (
-            <span className="nav_item" onClick={signOutHandler}>
+            <span className="nav_item" onClick={signOutUser}>
               Sign out
             </span>
           ) : (
