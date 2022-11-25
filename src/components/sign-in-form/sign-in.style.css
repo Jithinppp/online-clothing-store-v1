@@ -4,6 +4,7 @@
   justify-content: center;
   flex-direction: column;
   padding: 2rem 0;
+  transition: 0.1s ease;
 }
 .sign-up_container {
   display: flex;
@@ -33,7 +34,7 @@
   background-color: #fff;
   outline: none;
   border: none;
-  padding: 7px;
+  padding: 10px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
@@ -64,13 +65,24 @@
   background-color: rgb(19, 19, 19);
   outline: none;
   border: none;
-  padding: 7px;
+  padding: 10px;
   border-radius: 5px;
   cursor: pointer;
-  /* opacity: 0.9;/ */
   transition: 0.1s ease;
 }
 .form-submit_button:hover {
   opacity: 1;
   transform: scale(1.01);
+}
+
+@media only screen and (min-width: 760px) {
+  .form-submit_button,
+  .sign-in-popup_button {
+    width: 330px;
+  }
+}
+@media only screen and (max-width: 600px) {
+  .sign-in_container {
+    padding: 0;
+  }
 }

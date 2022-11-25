@@ -1,8 +1,9 @@
 .navigation_container {
-  margin-top: 1rem;
+  margin: 1rem 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: 0.1s ease;
 }
 .main_logo {
   margin: 0;
@@ -15,11 +16,14 @@
   list-style: none;
   align-items: center;
   justify-content: space-evenly;
+  transition: 0.1s ease;
 }
 .nav_item {
   margin: 0 1.5rem;
   font-size: 1.1rem;
   font-weight: 400;
+  transition: 0.1s ease;
+  cursor: pointer;
 }
 
 @media only screen and (max-width: 550px) {

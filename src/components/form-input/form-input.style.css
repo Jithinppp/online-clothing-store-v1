@@ -1,6 +1,6 @@
 .form-input {
   width: 270px;
-  margin: 5px 0;
+  margin: 8px 0;
   outline: none;
   border: none;
   border-radius: 2px;
@@ -10,4 +10,11 @@
 }
 .form-input::placeholder {
   opacity: 0.8;
+}
+
+@media only screen and (min-width: 760px) {
+  .form-input {
+    width: 330px;
+    margin: 16px 0;
+  }
 }

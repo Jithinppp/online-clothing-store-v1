@@ -1,21 +1,26 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/user.context";
+// components
 import "./sign-in.style.css";
 import FormInput from "../form-input/Form-Input.component";
 import { ReactComponent as GoogleIcon } from "../../assets/images/1534129544.svg";
 
+// utils
 import {
   createUserDocumentFromAuth,
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase";
 
-// default state fields
+// default variables
 const defaultFormFields = {
   email: "",
   password: "",
 };
 
 const SignInForm = () => {
+  // context variables
+  const { setCurrentUser } = useContext(UserContext);
   // state for form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
@@ -34,12 +39,16 @@ const SignInForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      const response = await signInAuthUserWithEmailAndPassword(
+      const { user } = await signInAuthUserWithEmailAndPassword(
         email,
         password
       );
-      console.log(response);
+      // setting the current user in context
+      setCurrentUser(user);
+      // clearing the inputs
+      clearInputs();
     } catch (error) {
+      // handling the errors
       switch (error.code) {
         case "auth/user-not-found":
           alert("user not found");
@@ -57,10 +66,11 @@ const SignInForm = () => {
   const logGoogleUser = async () => {
     try {
       const { user } = await signInWithGooglePopup();
-      console.log(user);
+      // set currentUser in context
+      setCurrentUser(user);
       const userRef = await createUserDocumentFromAuth(user);
-      console.log(userRef);
     } catch (error) {
+      // error handling
       alert(error.code);
     }
   };

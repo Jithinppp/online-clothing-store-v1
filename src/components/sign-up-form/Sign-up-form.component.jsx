@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { UserContext } from "../../context/user.context";
+// components
 import "./sign-up-form.style.css";
 import FormInput from "../form-input/Form-Input.component";
-
+// utils
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase";
 
-// default state fields
+// default state fields vars
 const defaultFormFields = {
   displayName: "",
   email: "",
@@ -16,9 +18,13 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  // context values
+  const { setCurrentUser } = useContext(UserContext);
+
   // state for form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
+
   // changeHandler for input changes
   const formChangeHandler = (event) => {
     const { name, value } = event.target;
@@ -31,6 +37,7 @@ const SignUpForm = () => {
   const clearInputs = () => {
     setFormFields(defaultFormFields);
   };
+
   // form submit
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -40,14 +47,17 @@ const SignUpForm = () => {
           email,
           password
         );
+        // setting currentUser in context
+        setCurrentUser(user);
         await createUserDocumentFromAuth(user, { displayName });
-        console.log(user);
+        //  clearing inputs
         clearInputs();
       } catch (error) {
+        // error handling
         console.log(error);
       }
     } else {
-      console.log("wrong credentials");
+      alert("wrong credentials");
     }
   };
 

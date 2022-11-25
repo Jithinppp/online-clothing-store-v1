@@ -7,6 +7,7 @@ import {
   GoogleAuthProvider,
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 // similar to firebase/app for authentication import firestore to interact with firestore database
 import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
@@ -29,6 +30,8 @@ provider.setCustomParameters({
 });
 // creating auth instance
 export const auth = getAuth();
+
+// !interface functions
 // sign-in with popup
 export const signInWithGooglePopup = () => signInWithPopup(auth, provider);
 // sign up with email and password or create account with email and password
@@ -41,7 +44,10 @@ export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+// signOut function
+export const signOutUser = async () => await signOut(auth);
 
+// !database Functions
 // initialize firestore database
 export const db = getFirestore();
 
