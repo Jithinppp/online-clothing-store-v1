@@ -10,6 +10,7 @@ import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase";
+import { ButtonPrimary } from "../../layouts/utility/util.component";
 
 // default variables
 const defaultFormFields = {
@@ -90,9 +91,11 @@ const SignInForm = () => {
           value={password}
           onChange={formChangeHandler}
         />
-        <button className="form-submit_button" type="submit">
-          Sign In
-        </button>
+        <ButtonPrimary
+          className="form-submit_button"
+          type="submit"
+          content="Sign In"
+        />
       </form>
     </div>
   );

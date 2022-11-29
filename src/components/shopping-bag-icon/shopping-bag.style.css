@@ -1,0 +1,12 @@
+.bag-icon_container {
+  position: relative;
+  cursor: pointer;
+}
+.cart-value {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 0.8rem;
+  font-weight: 700;
+}

@@ -4,6 +4,7 @@
   justify-content: space-between;
   align-items: center;
   transition: 0.1s ease;
+  position: relative;
 }
 .main_logo {
   margin: 0;

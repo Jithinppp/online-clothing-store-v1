@@ -1,0 +1,21 @@
+.cart-dropdown_container {
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #9d9d9d53;
+  padding: 1rem;
+  border-radius: 3px;
+  right: 1rem;
+  bottom: 0;
+  width: 250px;
+  height: 300px;
+  z-index: 100;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transform: translateY(105%);
+}
+
+@media screen and (min-width: 550px) {
+  .cart-dropdown_container {
+    width: 300px;
+    height: 400px;
+  }
+}

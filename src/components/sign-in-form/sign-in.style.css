@@ -58,22 +58,6 @@
 .sign-up_form {
   margin-top: 0.5rem;
 }
-.form-submit_button {
-  margin: 1rem 0;
-  width: 270px;
-  color: #fff;
-  background-color: rgb(19, 19, 19);
-  outline: none;
-  border: none;
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: 0.1s ease;
-}
-.form-submit_button:hover {
-  opacity: 1;
-  transform: scale(1.01);
-}
 
 @media only screen and (min-width: 760px) {
   .form-submit_button,

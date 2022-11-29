@@ -36,16 +36,19 @@ export const auth = getAuth();
 // sign-in with popup
 export const signInWithGooglePopup = async () =>
   await signInWithPopup(auth, provider);
+
 // sign up with email and password or create account with email and password
 export const createAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await createUserWithEmailAndPassword(auth, email, password);
 };
+
 // sign in with email and password
 export const signInAuthUserWithEmailAndPassword = async (email, password) => {
   if (!email || !password) return;
   return await signInWithEmailAndPassword(auth, email, password);
 };
+
 // signOut function
 export const signOutUser = async () => await signOut(auth);
 

@@ -8,6 +8,7 @@ import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase";
+import { ButtonPrimary } from "../../layouts/utility/util.component";
 
 // default state fields vars
 const defaultFormFields = {
@@ -93,9 +94,7 @@ const SignUpForm = () => {
           value={confirmPassword}
           onChange={formChangeHandler}
         />
-        <button className="form-submit_button" type="submit">
-          Sign Up
-        </button>
+        <ButtonPrimary type="submit" content="Sign Up" />
       </form>
     </div>
   );
