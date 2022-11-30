@@ -103,7 +103,6 @@ const CartProvider = ({ children }) => {
     decrementCheckoutItem,
     totalPrice,
   };
-  console.log(cartItems);
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
 };

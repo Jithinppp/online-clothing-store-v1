@@ -11,7 +11,16 @@ import {
   onAuthStateChanged,
 } from "firebase/auth";
 // similar to firebase/app for authentication import firestore to interact with firestore database
-import { getFirestore, doc, setDoc, getDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  doc,
+  setDoc,
+  getDoc,
+  collection,
+  writeBatch,
+  query,
+  getDocs,
+} from "firebase/firestore";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -29,10 +38,15 @@ const provider = new GoogleAuthProvider();
 provider.setCustomParameters({
   prompt: "select_account",
 });
-// creating auth instance
-export const auth = getAuth();
 
-// !interface functions
+// creating / initialize auth instance
+export const auth = getAuth();
+// initialize firestore database
+export const db = getFirestore();
+
+// !these are the utility functions that can manage if any update in the third-party libs eg firebase
+// ? for authentication
+
 // sign-in with popup
 export const signInWithGooglePopup = async () =>
   await signInWithPopup(auth, provider);
@@ -57,10 +71,7 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 
-// !database Functions
-// initialize firestore database
-export const db = getFirestore();
-
+//? for firestore
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalData = {}
@@ -95,22 +106,45 @@ export const createUserDocumentFromAuth = async (
   return userDocRef;
 };
 
-// firebase authentication
-// Note: after installed firebase npm package create firebase util file and import all necessary items
-// 1. you need to initialize app that make a instance of app by using necessary tokens(firebaseConfig) that get from console
-// 2. to make a authentication with google we need a provider instance by google auth provider class
-// provider gives the functionalities to sign in it interact with google server and give ability to make authentication
-// 3. to create an instance we need auth from getAuth() and export it.
-// auth is a single function that only does one thing means communication to google auth is same all time one app need
-//  only one authentication service, but provider is a class it inherits some different functionalities that we
-// can make use of eg. different buttons make different form of authentication
-// 4. export signInWithPopup with auth and provider as argument
-// 5.go to console and enable google in sign-in providers
+// uploading/add/create a data into firestore
+export const addCollectionAndDocument = async (
+  collectionKey,
+  objectToStore,
+  field
+) => {
+  console.log(collectionKey, objectToStore);
+  // collection key is the key of the collection like reference
+  // objectToStore is the object we want to store in the database
+  // filed will decide the title of the collection item or filed in the collection item
+  const collectionRef = collection(db, collectionKey);
+  // initiate the batch
+  const batch = writeBatch(db);
+  // loop through the batch and make a docRef and set the batch
+  objectToStore.forEach((object) => {
+    const docRef = doc(collectionRef, field);
+    batch.set(docRef, object);
+  });
+  // after setting the batch commit it
+  await batch.commit();
+  console.log("done");
+};
 
-// firebase firestore
-//1. import it from firebase/firestore
-// getFirestore to get the data from the database firestore so make a instance of it
-// doc is the snap shot of document not the data
-// setDoc to set some data inside of doc, similarly getDoc to get the data from the document
-// db directly points the database
-// Note:if the data don't exist in the database google create that because of no harm in db
+// for get/retrieve a data from firestore
+export const getCollectionAndDocument = async () => {
+  // set the reference
+  const collectionRef = collection(db, "categories");
+  // make a query to the server with the reference
+  const q = query(collectionRef);
+  // after creating query get the snapshot or doc by the query as argument
+  const querySnapshot = await getDocs(q);
+  //querySnapshot has a docs and a function data() that will get the actual data from database
+  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
+    // getting data from documentSnapshot and call data() method to get exact data
+    // after that return the reduce method a object that contain title and its items
+    // initially reduce acc is a {} there for acc add up new key:title and its value is items
+    const { items, title } = docSnapshot.data();
+    acc[title.toLowerCase()] = items;
+    return acc;
+  }, {});
+  return categoryMap;
+};
