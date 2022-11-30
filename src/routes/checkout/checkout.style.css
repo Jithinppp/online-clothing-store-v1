@@ -1,0 +1,29 @@
+table {
+  width: 100%;
+
+  text-align: center;
+}
+
+th {
+  border-bottom: 1px solid rgb(154, 153, 153);
+  font-size: 1.1rem;
+  font-weight: 400;
+  padding: 1rem 2rem;
+}
+.product_description {
+  display: flex;
+  align-items: center;
+}
+.product_name {
+  margin: 0 1rem;
+  font-size: 1.2rem;
+}
+
+@media screen and (max-width: 550px) {
+  th {
+    padding: 0;
+  }
+  .product_name {
+    font-size: 1rem;
+  }
+}

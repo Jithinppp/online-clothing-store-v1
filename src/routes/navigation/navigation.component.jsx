@@ -1,4 +1,4 @@
-import { Fragment, useContext, useState } from "react";
+import { Fragment, useContext } from "react";
 import { Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../context/user.context";
 
@@ -6,18 +6,19 @@ import { UserContext } from "../../context/user.context";
 import "./navigation.style.css";
 import { signOutUser } from "../../utils/firebase";
 import ShoppingBagIcon from "../../components/shopping-bag-icon/shopping-bag-icon.component";
-import CartDropdown from "../../components/cart-popup/cart-dropdown.compoent";
+import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+import { CartContext } from "../../context/cart.context";
 
 const Navigation = (props) => {
   const { currentUser } = useContext(UserContext);
-  const [cartPopupModel, setCartPopupModel] = useState(false);
-  const setCart = () => {
-    setCartPopupModel((prev) => !prev);
-  };
+  const { cartDropdown } = useContext(CartContext);
+
   return (
     <Fragment>
       <nav className="navigation_container">
-        <h1 className="main_logo">OUTFITS</h1>
+        <Link to="/">
+          <h1 className="main_logo">OUTFITS</h1>
+        </Link>
         <div className="nav_items">
           <Link className="nav_item" to="shop">
             Shop
@@ -34,8 +35,8 @@ const Navigation = (props) => {
               Sign in
             </Link>
           )}
-          <ShoppingBagIcon setCart={setCart} />
-          {cartPopupModel && <CartDropdown />}
+          <ShoppingBagIcon />
+          {cartDropdown && <CartDropdown />}
         </div>
       </nav>
       <Outlet />

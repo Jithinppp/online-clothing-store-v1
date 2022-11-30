@@ -6,16 +6,17 @@
 body {
   font-family: "Outfit", sans-serif;
   color: rgb(62, 62, 62);
+  padding: 0 0.5rem;
 }
 ::-webkit-scrollbar {
-  width: 8px;
-  height: 8px;
+  width: 3px;
+  height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #f1f1f1;
+  background: #f1f1f135;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgb(221, 221, 221);
+  background: rgba(87, 87, 87, 0.338);
 }
 
 a {
