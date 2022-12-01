@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { CartDropdownContainer, EmptyTitle } from "./cart-dropdown.style";
 import { CartContext } from "../../context/cart.context";
 import CartItem from "../cart-item/cart-item.component";
-import { LightBtnSecondaryInverted } from "../../layouts/Shared";
+import { LightBtnSecondaryInverted } from "../../layouts/Shared.js";
 
 const CartDropdown = () => {
   const { cartItems, toggleCart } = useContext(CartContext);

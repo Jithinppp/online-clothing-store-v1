@@ -75,11 +75,11 @@ export const LightBtnSecondary = styled.button`
   cursor: pointer;
   background-color: #fff;
   border: 2px solid #000;
-
   &:hover {
     transform: scale(0.97);
   }
 `;
+
 export const LightBtnSecondaryInverted = styled(LightBtnSecondary)`
   background-color: #000;
   color: #fff;
