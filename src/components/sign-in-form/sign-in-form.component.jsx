@@ -7,7 +7,7 @@ import {
   MainTitle,
   LightBtnPrimary,
   DarkBtnPrimary,
-} from "../../layouts/Shared";
+} from "../../layouts/shared/Shared.js";
 import { ReactComponent as GoogleIcon } from "../../assets/images/1534129544.svg";
 import FormInput from "../form-input/Form-Input.component";
 

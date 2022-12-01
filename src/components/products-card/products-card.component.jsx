@@ -8,7 +8,7 @@ import {
   ButtonPriceContainer,
   ProductPrice,
 } from "./products-card.style.js";
-import { LightBtnSecondary } from "../../layouts/Shared.js";
+import { LightBtnSecondary } from "../../layouts/shared/Shared.js";
 import { CartContext } from "../../context/cart.context";
 
 const ProductCard = ({ productData }) => {

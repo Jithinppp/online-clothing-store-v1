@@ -2,7 +2,11 @@ import { useState } from "react";
 
 // components
 import { SignUpContainer, SignUpFormWrapper } from "./sign-up-form.style";
-import { MainTitle, LightSubtitle, DarkBtnPrimary } from "../../layouts/Shared";
+import {
+  MainTitle,
+  LightSubtitle,
+  DarkBtnPrimary,
+} from "../../layouts/shared/Shared.js";
 import FormInput from "../form-input/Form-Input.component";
 
 // firebase utils
