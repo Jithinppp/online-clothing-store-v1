@@ -1,12 +1,12 @@
 import styled from "styled-components";
 
 export const CategoryContainer = styled.div`
+  background-image: ${({ imageUrl }) => `url(${imageUrl})`};
   min-height: 160px;
   object-fit: cover;
   background-size: cover;
   background-position: center;
   border-radius: 2px;
-  cursor: pointer;
   transition: all 0.5s ease-out;
   grid-column: ${({ catId }) => (catId === 2 ? "2 / -1" : "")};
   grid-row: ${({ catId }) => (catId === 2 ? "1 / span 2" : "")};

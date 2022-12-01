@@ -66,6 +66,8 @@ export const DarkBtnPrimary = styled.button`
 `;
 
 export const LightBtnSecondary = styled.button`
+  width: 90%;
+  margin: 0 1rem;
   outline: none;
   border: none;
   padding: 3px 8px;
@@ -73,7 +75,12 @@ export const LightBtnSecondary = styled.button`
   cursor: pointer;
   background-color: #fff;
   border: 2px solid #000;
+
   &:hover {
-    background-color: #f0eeee;
+    transform: scale(0.97);
   }
+`;
+export const LightBtnSecondaryInverted = styled(LightBtnSecondary)`
+  background-color: #000;
+  color: #fff;
 `;
