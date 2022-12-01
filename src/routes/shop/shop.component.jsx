@@ -1,24 +1,17 @@
-import { useContext, Fragment } from "react";
-import { CategoriesContext } from "../../context/categories.context";
-
+import { Route, Routes } from "react-router-dom";
+import CategoriesPreview from "../categories-preview/categories-preview.component";
+import Category from "../category/category.component";
 import "./shop.style.css";
-import ProductCard from "../../components/products-card/products-card.component";
-const Shop = () => {
-  const { categories } = useContext(CategoriesContext);
 
+const Shop = () => {
   return (
-    <Fragment>
-      {Object.keys(categories).map((title) => (
-        <div key={title}>
-          <h3 className="shop_title">{title}</h3>
-          <div className="products_container">
-            {categories[title].map((data) => {
-              return <ProductCard key={data.id} productData={data} />;
-            })}
-          </div>
-        </div>
-      ))}
-    </Fragment>
+    <Routes>
+      <Route index element={<CategoriesPreview />} />
+      <Route path=":category" element={<Category />} />
+    </Routes>
   );
 };
 export default Shop;
+
+// the path=":anything" is make a variable in the usePrams() we can destructure it
+// by that we can create dynamic pages or rendering or components

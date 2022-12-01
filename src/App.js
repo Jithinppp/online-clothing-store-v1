@@ -13,7 +13,7 @@ const App = () => {
       <Route path="/" element={<Navigation />}>
         <Route index element={<Home />} />
         <Route path="authentication" element={<Authentication />} />
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop/*" element={<Shop />} />
         <Route path="checkout" element={<Checkout />} />
       </Route>
     </Routes>
@@ -25,3 +25,5 @@ export default App;
 // also use Outlet from RDM to show where the nested components should render
 // inside that we provide all the route for nest
 // the index property make a default page component in that particular route
+// the path="shop/*" asterisk means whatever the route shop/anything it will render the shop component
+// then we can handle that route in the shop route or shop component

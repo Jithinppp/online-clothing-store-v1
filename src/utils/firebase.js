@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // Import the functions you need from the SDKs you need
 // Adding SDKs for Firebase products that you want to use
 import { initializeApp } from "firebase/app";
