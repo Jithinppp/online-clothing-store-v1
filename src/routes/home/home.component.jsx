@@ -1,4 +1,6 @@
-import "./home.style.css";
+import { Fragment } from "react";
+
+// components
 import Directory from "../../components/directory/Directory.component";
 
 const Home = () => {
@@ -30,9 +32,9 @@ const Home = () => {
     },
   ];
   return (
-    <main className="home">
+    <Fragment>
       <Directory categories={categories} />
-    </main>
+    </Fragment>
   );
 };
 export default Home;

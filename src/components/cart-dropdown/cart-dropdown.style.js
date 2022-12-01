@@ -1,4 +1,6 @@
-.cart-dropdown_container {
+import styled from "styled-components";
+
+export const CartDropdownContainer = styled.div`
   position: absolute;
   background-color: #fff;
   border: 1px solid #9d9d9d53;
@@ -12,16 +14,12 @@
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
   transform: translateY(105%);
   overflow-y: scroll;
-}
-
-.empty_title {
-  font-size: 1.2rem;
-  text-align: center;
-}
-
-@media screen and (min-width: 550px) {
-  .cart-dropdown_container {
+  @media (min-width: 550px) {
     width: 300px;
     height: 400px;
   }
-}
+`;
+export const EmptyTitle = styled.p`
+  font-size: 1.2rem;
+  text-align: center;
+`;

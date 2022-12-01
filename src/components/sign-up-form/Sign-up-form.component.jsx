@@ -1,14 +1,15 @@
 import { useState } from "react";
 
 // components
-import "./sign-up-form.style.css";
+import { SignUpContainer, SignUpFormWrapper } from "./sign-up-form.style";
+import { MainTitle, LightSubtitle, DarkBtnPrimary } from "../../layouts/Shared";
 import FormInput from "../form-input/Form-Input.component";
-// utils
+
+// firebase utils
 import {
   createAuthUserWithEmailAndPassword,
   createUserDocumentFromAuth,
 } from "../../utils/firebase";
-import { ButtonPrimary } from "../../layouts/utility/util.component";
 
 // default state fields vars
 const defaultFormFields = {
@@ -58,45 +59,47 @@ const SignUpForm = () => {
   };
 
   return (
-    <div className="sign-up_container">
-      <h1 className="sign-in_title">Sign Up</h1>
-      <p className="sign-in_subtitle">Let's start with new account</p>
-      <form className="sign-up_form" onSubmit={submitHandler}>
-        <FormInput
-          placeholder="Display name"
-          type="text"
-          required
-          name="displayName"
-          value={displayName}
-          onChange={formChangeHandler}
-        />
-        <FormInput
-          placeholder="Email"
-          type="email"
-          required
-          name="email"
-          value={email}
-          onChange={formChangeHandler}
-        />
-        <FormInput
-          placeholder="Password"
-          type="password"
-          required
-          name="password"
-          value={password}
-          onChange={formChangeHandler}
-        />
-        <FormInput
-          placeholder="Confirm password"
-          type="password"
-          required
-          name="confirmPassword"
-          value={confirmPassword}
-          onChange={formChangeHandler}
-        />
-        <ButtonPrimary type="submit" content="Sign Up" />
-      </form>
-    </div>
+    <SignUpContainer className="sign-up_container">
+      <MainTitle>Sign Up</MainTitle>
+      <LightSubtitle>Let's start with new account</LightSubtitle>
+      <SignUpFormWrapper>
+        <form onSubmit={submitHandler}>
+          <FormInput
+            placeholder="Display name"
+            type="text"
+            required
+            name="displayName"
+            value={displayName}
+            onChange={formChangeHandler}
+          />
+          <FormInput
+            placeholder="Email"
+            type="email"
+            required
+            name="email"
+            value={email}
+            onChange={formChangeHandler}
+          />
+          <FormInput
+            placeholder="Password"
+            type="password"
+            required
+            name="password"
+            value={password}
+            onChange={formChangeHandler}
+          />
+          <FormInput
+            placeholder="Confirm password"
+            type="password"
+            required
+            name="confirmPassword"
+            value={confirmPassword}
+            onChange={formChangeHandler}
+          />
+          <DarkBtnPrimary type="submit">Sign Up</DarkBtnPrimary>
+        </form>
+      </SignUpFormWrapper>
+    </SignUpContainer>
   );
 };
 export default SignUpForm;

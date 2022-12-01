@@ -1,21 +1,24 @@
-import "./category-preview.style.css";
-import ProductCard from "../products-card/products-card.component";
+import { Fragment } from "react";
 import { Link } from "react-router-dom";
+
+// components
+import { ShopTitle, ProductsContainer } from "./category-preview.style.js";
+import ProductCard from "../products-card/products-card.component";
 
 const CategoryPreview = ({ title, product }) => {
   return (
-    <div>
+    <Fragment>
       <Link to={title}>
-        <h3 className="shop_title">{title}</h3>
+        <ShopTitle>{title}</ShopTitle>
       </Link>
-      <div className="products_container">
+      <ProductsContainer>
         {product
           .filter((_, idx) => idx < 4)
           .map((item) => (
             <ProductCard key={item.id} productData={item} />
           ))}
-      </div>
-    </div>
+      </ProductsContainer>
+    </Fragment>
   );
 };
 export default CategoryPreview;

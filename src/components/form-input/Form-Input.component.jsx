@@ -1,8 +1,10 @@
-import "./form-input.style.css";
+// components
+import { FormInputItem } from "./form-input.style";
+
 const FormInput = ({ label, ...otherProps }) => {
   return (
-    <div className="form-input_container">
-      <input className="form-input" {...otherProps} />
+    <div>
+      <FormInputItem {...otherProps} />
     </div>
   );
 };

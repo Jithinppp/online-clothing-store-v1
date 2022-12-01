@@ -1,9 +1,11 @@
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+
+// components
+import { CartDropdownContainer, EmptyTitle } from "./cart-dropdown.style";
 import { CartContext } from "../../context/cart.context";
-import { ButtonSecondary } from "../../layouts/utility/util.component";
 import CartItem from "../cart-item/cart-item.component";
-import "./cart-dropdown.style.css";
+import { LightBtnSecondary } from "../../layouts/Shared";
 
 const CartDropdown = () => {
   const { cartItems, toggleCart } = useContext(CartContext);
@@ -14,16 +16,18 @@ const CartDropdown = () => {
   };
 
   return (
-    <div className="cart-dropdown_container">
+    <CartDropdownContainer>
       {cartItems.map((item) => {
         return <CartItem key={item.id} cartItem={item} />;
       })}
       {cartItems.length ? (
-        <ButtonSecondary content={"checkout"} onClick={checkoutHandler} />
+        <LightBtnSecondary onClick={checkoutHandler}>
+          Checkout
+        </LightBtnSecondary>
       ) : (
-        <p className="empty_title">your cart is empty</p>
+        <EmptyTitle>your cart is empty</EmptyTitle>
       )}
-    </div>
+    </CartDropdownContainer>
   );
 };
 export default CartDropdown;

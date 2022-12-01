@@ -1,4 +1,6 @@
-.form-input {
+import styled from "styled-components";
+
+export const FormInputItem = styled.input`
   width: 270px;
   margin: 8px 0;
   outline: none;
@@ -7,14 +9,11 @@
   height: 35px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.188);
   padding: 3px;
-}
-.form-input::placeholder {
-  opacity: 0.8;
-}
-
-@media only screen and (min-width: 760px) {
-  .form-input {
+  &::placeholder {
+    opacity: 0.8;
+  }
+  @media (min-width: 760px) {
     width: 330px;
     margin: 16px 0;
   }
-}
+`;

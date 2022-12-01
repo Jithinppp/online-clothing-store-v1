@@ -1,13 +1,14 @@
+// components
+import { DirectoryContainer } from "./directory.style";
 import Category from "../category/Category.component";
-import "./directory.syle.css";
 
 const Directory = ({ categories }) => {
   return (
-    <div className="directory_container">
+    <DirectoryContainer>
       {categories.map((catg) => {
         return <Category key={catg.id} catg={catg} />;
       })}
-    </div>
+    </DirectoryContainer>
   );
 };
 

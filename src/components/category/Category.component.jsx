@@ -1,17 +1,19 @@
-import "./category.style.css";
+import {
+  CategoryContainer,
+  CategorySubTitle,
+  CategoryTitle,
+  CategoryTitleContainer,
+} from "./category.style";
 
 const Category = ({ catg }) => {
   const { id, title, url } = catg;
   return (
-    <div
-      className={`category category_${id}`}
-      style={{ backgroundImage: `url(${url})` }}
-    >
-      <div className="category_title_container">
-        <h3 className="category_title">{title}</h3>
-        <p className="category_subtitle">Shop now</p>
-      </div>
-    </div>
+    <CategoryContainer catId={id} style={{ backgroundImage: `url(${url})` }}>
+      <CategoryTitleContainer>
+        <CategoryTitle>{title}</CategoryTitle>
+        <CategorySubTitle>Shop now</CategorySubTitle>
+      </CategoryTitleContainer>
+    </CategoryContainer>
   );
 };
 

@@ -1,7 +1,15 @@
-import "./checkout-item.style.css";
-import { BiX, BiPlus, BiMinus } from "react-icons/bi";
 import { useContext } from "react";
+
+// components
+import { BiX, BiPlus, BiMinus } from "react-icons/bi";
 import { CartContext } from "../../context/cart.context";
+import {
+  CenterTableData,
+  ProductDescription,
+  ProductImage,
+  ProductName,
+  TableData,
+} from "./checkout-item.style";
 
 const CheckoutItem = ({ productData }) => {
   const { name, imageUrl, price, quantity } = productData;
@@ -10,35 +18,29 @@ const CheckoutItem = ({ productData }) => {
 
   return (
     <tr>
-      <td>
-        <div className="product_description">
-          <img
-            src={imageUrl}
-            width={70}
-            height={70}
-            alt={name}
-            className="product_img"
-          />
-          <span className="product_name">{name}</span>
-        </div>
-      </td>
-      <td>
-        <div className="center_table-data">
+      <TableData>
+        <ProductDescription>
+          <ProductImage src={imageUrl} width={70} height={70} alt={name} />
+          <ProductName>{name}</ProductName>
+        </ProductDescription>
+      </TableData>
+      <TableData>
+        <CenterTableData>
           {/* on click decrement checkout item */}
           {<BiMinus onClick={() => decrementCheckoutItem(productData)} />}
           {quantity}
           {/* onclick increment checkout item */}
           {<BiPlus onClick={() => addToCart(productData)} />}
-        </div>
-      </td>
-      <td>
-        <div className="center_table-data">{price}$</div>
-      </td>
-      <td className="remove_checkout_item">
-        <div className="center_table-data">
+        </CenterTableData>
+      </TableData>
+      <TableData>
+        <CenterTableData>{price}$</CenterTableData>
+      </TableData>
+      <TableData>
+        <CenterTableData>
           {<BiX onClick={() => removeItemFromCart(productData)} />}
-        </div>
-      </td>
+        </CenterTableData>
+      </TableData>
     </tr>
   );
 };

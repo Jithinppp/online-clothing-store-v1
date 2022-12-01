@@ -3,7 +3,12 @@ import { Outlet, Link } from "react-router-dom";
 import { UserContext } from "../../context/user.context";
 
 // components
-import "./navigation.style.css";
+import {
+  NavigationContainer,
+  MainLogo,
+  NavItems,
+  NavItem,
+} from "./navigation.styles";
 import { signOutUser } from "../../utils/firebase";
 import ShoppingBagIcon from "../../components/shopping-bag-icon/shopping-bag-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
@@ -15,30 +20,22 @@ const Navigation = (props) => {
 
   return (
     <Fragment>
-      <nav className="navigation_container">
+      <NavigationContainer>
         <Link to="/">
-          <h1 className="main_logo">OUTFITS</h1>
+          <MainLogo>OUTFITS</MainLogo>
         </Link>
-        <div className="nav_items">
-          <Link className="nav_item" to="shop">
-            Shop
-          </Link>
-          <Link className="nav_item" to="contact">
-            Contact
-          </Link>
+        <NavItems>
+          <NavItem to="shop">Shop</NavItem>
+          <NavItem to="contact">Contact</NavItem>
           {currentUser ? (
-            <span className="nav_item" onClick={signOutUser}>
-              Sign out
-            </span>
+            <NavItem onClick={signOutUser}>Sign out</NavItem>
           ) : (
-            <Link className="nav_item" to="authentication">
-              Sign in
-            </Link>
+            <NavItem to="authentication">Sign in</NavItem>
           )}
           <ShoppingBagIcon />
           {cartDropdown && <CartDropdown />}
-        </div>
-      </nav>
+        </NavItems>
+      </NavigationContainer>
       <Outlet />
     </Fragment>
   );

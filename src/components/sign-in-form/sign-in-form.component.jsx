@@ -1,16 +1,21 @@
 import { useState } from "react";
 
 // components
-import "./sign-in.style.css";
-import FormInput from "../form-input/Form-Input.component";
+import { SignInContainer, Separator, SignInFormWrapper } from "./sign-in.style";
+import {
+  LightSubtitle,
+  MainTitle,
+  LightBtnPrimary,
+  DarkBtnPrimary,
+} from "../../layouts/Shared";
 import { ReactComponent as GoogleIcon } from "../../assets/images/1534129544.svg";
+import FormInput from "../form-input/Form-Input.component";
 
-// utils
+// firebase utils
 import {
   signInAuthUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase";
-import { ButtonPrimary } from "../../layouts/utility/util.component";
 
 // default variables
 const defaultFormFields = {
@@ -66,38 +71,36 @@ const SignInForm = () => {
   };
 
   return (
-    <div className="sign-in_container">
-      <h1 className="sign-in_title">Welcome back !</h1>
-      <p className="sign-in_subtitle">please enter your details</p>
-      <button className="sign-in-popup_button" onClick={logGoogleUser}>
+    <SignInContainer>
+      <MainTitle>Welcome back !</MainTitle>
+      <LightSubtitle>please enter your details</LightSubtitle>
+      <LightBtnPrimary onClick={logGoogleUser}>
         Log in with
         <GoogleIcon className="google_icon" />
-      </button>
-      <p className="or_separation">or</p>
-      <form className="sign-up_form" onSubmit={submitHandler}>
-        <FormInput
-          placeholder="Email"
-          type="email"
-          required
-          name="email"
-          value={email}
-          onChange={formChangeHandler}
-        />
-        <FormInput
-          placeholder="Password"
-          type="password"
-          required
-          name="password"
-          value={password}
-          onChange={formChangeHandler}
-        />
-        <ButtonPrimary
-          className="form-submit_button"
-          type="submit"
-          content="Sign In"
-        />
-      </form>
-    </div>
+      </LightBtnPrimary>
+      <Separator>or</Separator>
+      <SignInFormWrapper>
+        <form onSubmit={submitHandler}>
+          <FormInput
+            placeholder="Email"
+            type="email"
+            required
+            name="email"
+            value={email}
+            onChange={formChangeHandler}
+          />
+          <FormInput
+            placeholder="Password"
+            type="password"
+            required
+            name="password"
+            value={password}
+            onChange={formChangeHandler}
+          />
+          <DarkBtnPrimary type="submit">Sign in</DarkBtnPrimary>
+        </form>
+      </SignInFormWrapper>
+    </SignInContainer>
   );
 };
 

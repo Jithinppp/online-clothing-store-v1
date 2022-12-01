@@ -1,15 +1,21 @@
 import { useContext } from "react";
+
+// components
+import {
+  BagIconContainer,
+  CartValue,
+  ShoppingBagImage,
+} from "./shopping-bag.style";
 import bagIcon from "../../assets/images/shopping-bag.png";
 import { CartContext } from "../../context/cart.context";
-import "./shopping-bag.style.css";
 
 const ShoppingBagIcon = () => {
   const { cartCount, toggleCart } = useContext(CartContext);
   return (
-    <div className="bag-icon_container" onClick={toggleCart}>
-      <img width="30" src={bagIcon} alt="shopping-bag-icon" />
-      {cartCount > 0 ? <span className="cart-value">{cartCount}</span> : null}
-    </div>
+    <BagIconContainer onClick={toggleCart}>
+      <ShoppingBagImage width="30" src={bagIcon} alt="shopping-bag-icon" />
+      {cartCount > 0 ? <CartValue>{cartCount}</CartValue> : null}
+    </BagIconContainer>
   );
 };
 export default ShoppingBagIcon;
