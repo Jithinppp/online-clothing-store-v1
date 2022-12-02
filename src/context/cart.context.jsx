@@ -1,4 +1,5 @@
-import { createContext, useEffect, useState } from "react";
+import { createContext, useReducer } from "react";
+import { createAction } from "../utils/reducers/reducer.utils";
 
 export const CartContext = createContext({
   cartDropdown: false,
@@ -32,76 +33,119 @@ const addToCartHandler = (cartItems, productToCart) => {
 };
 
 // helper function to remove cart item
-const removeCartItem = (removableItem, cartItems) => {
+const removeCartItem = (cartItems, removableItem) => {
   const filteredItems = cartItems.filter(
     (item) => item.id !== removableItem.id
   );
   return filteredItems;
 };
 
+// decrement cart item
+const decrementCartItem = (cartItems, itemToRemove) => {
+  const existingCartItem = cartItems.find(
+    (cartItem) => cartItem.id === itemToRemove.id
+  );
+  if (existingCartItem.quantity === 1) {
+    return cartItems.filter((cartItem) => cartItem.id !== itemToRemove.id);
+  }
+  return cartItems.map((cartItem) =>
+    cartItem.id === itemToRemove.id
+      ? { ...cartItem, quantity: cartItem.quantity - 1 }
+      : cartItem
+  );
+};
+
+// reducers
+const CART_ACTION_TYPES = {
+  SET_CART_DROPDOWN: "SET_CART_DROPDOWN",
+  SET_CART_ITEMS: "SET_CART_ITEMS",
+};
+
+const INITIAL_STATE = {
+  cartDropdown: false,
+  cartItems: [],
+  cartCount: 0,
+  totalPrice: 0,
+};
+
+const cartReducer = (state, action) => {
+  const { type, payload } = action;
+
+  switch (type) {
+    case CART_ACTION_TYPES.SET_CART_ITEMS:
+      return {
+        ...state,
+        ...payload,
+      };
+    case CART_ACTION_TYPES.SET_CART_DROPDOWN:
+      return {
+        ...state,
+        cartDropdown: !state.cartDropdown,
+      };
+    default:
+      throw new Error(`unhandled error ${type} in cartReducer`);
+  }
+};
+
 // provider
 const CartProvider = ({ children }) => {
-  const [cartDropdown, setCartDropdown] = useState(false);
-  const [cartItems, setCartItems] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
+  const [state, dispatch] = useReducer(cartReducer, INITIAL_STATE);
+  const { cartDropdown, cartItems, cartCount, totalPrice } = state;
 
-  // for count of total items
-  useEffect(() => {
-    const count = cartItems.reduce(
+  // toggle cart icon dropdown functionality
+  const toggleCart = () => {
+    dispatch(createAction(CART_ACTION_TYPES.SET_CART_DROPDOWN));
+  };
+
+  // handling update in the cart both count and add remove total of cart
+  const updateCartItemReducer = (cartItems) => {
+    // increment count
+    const newCount = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
-    setCartCount(count);
-  }, [cartItems]);
-
-  // useEffect for total price keep separate useEffect is best practice
-  useEffect(() => {
+    // set total
     const newTotal = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity * cartItem.price,
       0
     );
-    setTotalPrice(newTotal);
-  }, [cartItems]);
 
-  // toggle cart icon dropdown functionality
-  const toggleCart = () => {
-    setCartDropdown((prev) => !prev);
+    dispatch(
+      createAction(CART_ACTION_TYPES.SET_CART_ITEMS, {
+        cartItems,
+        cartCount: newCount,
+        totalPrice: newTotal,
+      })
+    );
   };
-  // setting or add item to cart - cartItem helper function
+
+  // add items to cart
   const addToCart = (productToCart) => {
-    setCartItems(addToCartHandler(cartItems, productToCart));
+    const newCartItem = addToCartHandler(cartItems, productToCart);
+    updateCartItemReducer(newCartItem);
   };
 
   // delete item from cart - delete item form cart helper function
   const removeItemFromCart = (removableItem) => {
-    setCartItems(removeCartItem(removableItem, cartItems));
+    const newCartItem = removeCartItem(cartItems, removableItem);
+    updateCartItemReducer(newCartItem);
   };
-
-  const decrementCheckoutItem = (decrementItem) => {
-    // map through cartItem and return a decrement item by cartItem.id == incrementItem.id
-    // stop until 1
-    if (decrementItem.quantity > 1) {
-      setCartItems((prev) => {
-        return prev.map((item) =>
-          item.id === decrementItem.id
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        );
-      });
-    }
+  // decrement cart item
+  const decrementCheckoutItem = (itemToDecrement) => {
+    const newCartItem = decrementCartItem(cartItems, itemToDecrement);
+    updateCartItemReducer(newCartItem);
   };
 
   // values to the components
   const value = {
     cartDropdown,
-    toggleCart,
     cartItems,
-    addToCart,
     cartCount,
-    removeItemFromCart,
-    decrementCheckoutItem,
     totalPrice,
+    toggleCart,
+    addToCart,
+    decrementCheckoutItem,
+    removeItemFromCart,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
