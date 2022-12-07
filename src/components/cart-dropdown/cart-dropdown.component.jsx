@@ -1,18 +1,27 @@
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+
+// redux
+import {
+  selectCartDropdown,
+  selectCartItems,
+} from "../../store/cart/cart.selector";
+import { toggleCart } from "../../store/cart/cart.action";
 
 // components
 import { CartDropdownContainer, EmptyTitle } from "./cart-dropdown.style";
 import { LightBtnSecondaryInverted } from "../../layouts/shared/Shared.js";
-import { CartContext } from "../../context/cart.context";
 import CartItem from "../cart-item/cart-item.component";
 
 const CartDropdown = () => {
-  const { cartItems, toggleCart } = useContext(CartContext);
   const navigate = useNavigate();
-  const checkoutHandler = () => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
+  const cartDropdown = useSelector(selectCartDropdown);
+
+  const checkoutNavigateHandler = () => {
     navigate("/checkout");
-    toggleCart();
+    dispatch(toggleCart(!cartDropdown));
   };
 
   return (
@@ -21,7 +30,7 @@ const CartDropdown = () => {
         return <CartItem key={item.id} cartItem={item} />;
       })}
       {cartItems.length ? (
-        <LightBtnSecondaryInverted onClick={checkoutHandler}>
+        <LightBtnSecondaryInverted onClick={checkoutNavigateHandler}>
           Checkout
         </LightBtnSecondaryInverted>
       ) : (

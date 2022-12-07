@@ -1,7 +1,10 @@
-import { Fragment, useContext } from "react";
+import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { UserContext } from "../../context/user.context";
+import { useSelector } from "react-redux";
 
+// redux
+import { selectUser } from "../../store/user/user.selector";
+import { selectCartDropdown } from "../../store/cart/cart.selector";
 // components
 import {
   NavigationContainer,
@@ -12,11 +15,11 @@ import {
 import { signOutUser } from "../../utils/firebase";
 import ShoppingBagIcon from "../../components/shopping-bag-icon/shopping-bag-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
-import { CartContext } from "../../context/cart.context";
 
 const Navigation = (props) => {
-  const { currentUser } = useContext(UserContext);
-  const { cartDropdown } = useContext(CartContext);
+  const cartDropdown = useSelector(selectCartDropdown);
+  // getting data from redux we pass a selector function for each items
+  const currentUser = useSelector(selectUser);
 
   return (
     <Fragment>

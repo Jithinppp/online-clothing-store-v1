@@ -1,8 +1,15 @@
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+// redux
+import {
+  addToCart,
+  decrementCheckoutItem,
+  removeItemFromCart,
+} from "../../store/cart/cart.action";
+import { selectCartItems } from "../../store/cart/cart.selector";
 
 // components
 import { BiX, BiPlus, BiMinus } from "react-icons/bi";
-import { CartContext } from "../../context/cart.context";
 import {
   CenterTableData,
   ProductDescription,
@@ -12,9 +19,15 @@ import {
 } from "./checkout-item.style";
 
 const CheckoutItem = ({ productData }) => {
+  const dispatch = useDispatch();
+  const cartItems = useSelector(selectCartItems);
   const { name, imageUrl, price, quantity } = productData;
-  const { removeItemFromCart, addToCart, decrementCheckoutItem } =
-    useContext(CartContext);
+
+  const decrementCheckoutItemHandler = () =>
+    dispatch(decrementCheckoutItem(cartItems, productData));
+  const addToCartHandler = () => dispatch(addToCart(cartItems, productData));
+  const removeItemFromCartHandler = () =>
+    dispatch(removeItemFromCart(cartItems, productData));
 
   return (
     <tr>
@@ -27,10 +40,10 @@ const CheckoutItem = ({ productData }) => {
       <TableData>
         <CenterTableData>
           {/* on click decrement checkout item */}
-          {<BiMinus onClick={() => decrementCheckoutItem(productData)} />}
+          {<BiMinus onClick={decrementCheckoutItemHandler} />}
           {quantity}
           {/* onclick increment checkout item */}
-          {<BiPlus onClick={() => addToCart(productData)} />}
+          {<BiPlus onClick={addToCartHandler} />}
         </CenterTableData>
       </TableData>
       <TableData>
@@ -38,7 +51,8 @@ const CheckoutItem = ({ productData }) => {
       </TableData>
       <TableData>
         <CenterTableData>
-          {<BiX onClick={() => removeItemFromCart(productData)} />}
+          {/* on click remove item  */}
+          {<BiX onClick={removeItemFromCartHandler} />}
         </CenterTableData>
       </TableData>
     </tr>

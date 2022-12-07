@@ -1,12 +1,40 @@
+import { useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
-import Navigation from "./routes/navigation/navigation.component";
+import { useDispatch } from "react-redux";
 
+// utils
+import {
+  onAuthStateChangedListener,
+  createUserDocumentFromAuth,
+} from "./utils/firebase";
+
+// components
+import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
 import Authentication from "./routes/authentication/authentication.component";
 import Shop from "./routes/shop/shop.component";
 import Checkout from "./routes/checkout/checkout.component";
 
+//redux imports
+import { setCurrentUser } from "./store/user/user.action";
+
 const App = () => {
+  // only one dispatch in redux that make all dispatch
+  const dispatch = useDispatch();
+  // check user is logged in or not on initial mounting
+  useEffect(() => {
+    const unsubscribe = onAuthStateChangedListener((user) => {
+      if (user) {
+        // if the user exist store in firestore
+        createUserDocumentFromAuth(user);
+      }
+      // now we centralized out auth {type:"user-action-type",payload:user}
+      dispatch(setCurrentUser(user));
+    });
+    // running on unmount of the component
+    return unsubscribe;
+  }, []);
+
   return (
     // route make sure that url from browser keep up with Route that we provided inside
     <Routes>

@@ -130,8 +130,8 @@ export const addCollectionAndDocument = async (
   console.log("done");
 };
 
-// for get/retrieve a data from firestore
-export const getCollectionAndDocument = async () => {
+// for get/retrieve all categories data from firestore
+export const getCategoriesAndDocument = async () => {
   // set the reference
   const collectionRef = collection(db, "categories");
   // make a query to the server with the reference
@@ -139,13 +139,5 @@ export const getCollectionAndDocument = async () => {
   // after creating query get the snapshot or doc by the query as argument
   const querySnapshot = await getDocs(q);
   //querySnapshot has a docs and a function data() that will get the actual data from database
-  const categoryMap = querySnapshot.docs.reduce((acc, docSnapshot) => {
-    // getting data from documentSnapshot and call data() method to get exact data
-    // after that return the reduce method a object that contain title and its items
-    // initially reduce acc is a {} there for acc add up new key:title and its value is items
-    const { items, title } = docSnapshot.data();
-    acc[title.toLowerCase()] = items;
-    return acc;
-  }, {});
-  return categoryMap;
+  return querySnapshot.docs.map((docSnapshot) => docSnapshot.data());
 };

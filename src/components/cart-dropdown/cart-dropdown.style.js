@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const CartDropdownContainer = styled.div`
-  text-align: center;
+  /* text-align: center; */
   position: absolute;
   background-color: #fff;
   border: 1px solid #9d9d9d53;
-  padding: 2rem 1rem;
+  padding: 1rem 1rem;
   border-radius: 3px;
   right: 1rem;
   bottom: 0;

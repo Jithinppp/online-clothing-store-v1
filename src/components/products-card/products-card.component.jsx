@@ -1,5 +1,8 @@
-import { useContext } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
+// redux
+import { addToCart } from "../../store/cart/cart.action.js";
+import { selectCartItems } from "../../store/cart/cart.selector.js";
 // components
 import {
   ProductCardContainer,
@@ -9,11 +12,14 @@ import {
   ProductPrice,
 } from "./products-card.style.js";
 import { LightBtnSecondary } from "../../layouts/shared/Shared.js";
-import { CartContext } from "../../context/cart.context";
 
 const ProductCard = ({ productData }) => {
   const { name, imageUrl, price } = productData;
-  const { addToCart } = useContext(CartContext);
+  const cartItems = useSelector(selectCartItems);
+  const dispatch = useDispatch();
+
+  const addItemToCartHandler = () =>
+    dispatch(addToCart(cartItems, productData));
 
   return (
     <ProductCardContainer>
@@ -21,7 +27,7 @@ const ProductCard = ({ productData }) => {
       <ProductTitle>{name}</ProductTitle>
       <ButtonPriceContainer>
         <ProductPrice>{price}$</ProductPrice>
-        <LightBtnSecondary onClick={() => addToCart(productData)}>
+        <LightBtnSecondary onClick={addItemToCartHandler}>
           Add to cart
         </LightBtnSecondary>
       </ButtonPriceContainer>

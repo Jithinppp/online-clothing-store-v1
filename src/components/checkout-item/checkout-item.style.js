@@ -18,6 +18,7 @@ export const ProductDescription = styled.div`
 `;
 
 export const ProductImage = styled.img`
+  aspect-ratio: 1/1;
   object-fit: cover;
   background-size: cover;
   background-position: center;

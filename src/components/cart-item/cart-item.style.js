@@ -9,8 +9,8 @@ export const CartItemContainer = styled.div`
 `;
 
 export const CartItemImage = styled.img`
-  width: 50px;
   height: 50px;
+  width: 50px;
   object-fit: cover;
 `;
 
@@ -26,27 +26,6 @@ export const CartItemName = styled.span`
 
 export const CartItemQuantityPrice = styled.span`
   font-weight: 500;
+  font-size: 0.8rem;
+  color: #4448;
 `;
-
-/* .cart-item_container {
-  display: flex;
-  align-items: center;
-  height: 60px;
-  margin: 5px 0;
-  padding: 0 0.3rem;
-}
-.cart-item_image {
-  width: 50px;
-  height: 50px;
-}
-.cart-item_name {
-  font-size: 1.1rem;
-}
-.cart-item_quantity_price {
-  font-weight: 500;
-}
-.quantity_price_container {
-  margin: 0 1rem;
-  display: flex;
-  flex-direction: column;
-} */
