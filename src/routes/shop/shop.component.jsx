@@ -1,11 +1,8 @@
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
-
-// firebase utils
-import { getCategoriesAndDocument } from "../../utils/firebase";
 // redux imports
-import { setCategories } from "../../store/categories/categories.action";
+import { fetchCategoriesAsync } from "../../store/categories/categories.action";
 // components
 import "./shop.style.css";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
@@ -17,11 +14,7 @@ const Shop = () => {
   // getting categories
   useEffect(() => {
     // to use async function in useEffect use separate function expression
-    const getCollectionAndDocumentFromDatabase = async () => {
-      const categoriesArray = await getCategoriesAndDocument();
-      dispatch(setCategories(categoriesArray));
-    };
-    getCollectionAndDocumentFromDatabase();
+    dispatch(fetchCategoriesAsync());
   }, []);
 
   return (

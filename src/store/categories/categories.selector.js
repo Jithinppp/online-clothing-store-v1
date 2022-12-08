@@ -17,5 +17,12 @@ export const selectCategoriesMap = createSelector(
     }, {})
 );
 
+export const selectIsCategoriesLoading = createSelector(
+  [selectCategoriesReducer],
+  (categoriesSlice) => {
+    return categoriesSlice.isLoading;
+  }
+);
+
 // put all the business logic inside the selectors or redux
 // because we need the basic form from api and we extrapolate the logic in frontend
