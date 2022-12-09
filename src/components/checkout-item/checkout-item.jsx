@@ -33,7 +33,7 @@ const CheckoutItem = ({ productData }) => {
     <tr>
       <TableData>
         <ProductDescription>
-          <ProductImage src={imageUrl} width={70} height={70} alt={name} />
+          <ProductImage src={imageUrl} width={60} height={60} alt={name} />
           <ProductName>{name}</ProductName>
         </ProductDescription>
       </TableData>

@@ -2,13 +2,14 @@ import styled from "styled-components";
 
 export const TableData = styled.td`
   /* td */
+  font-weight: 300;
   padding: 1rem 2rem;
   vertical-align: middle;
   @media (max-width: 630px) {
     padding: 0.5rem;
   }
   @media (max-width: 440px) {
-    padding: 0;
+    padding: 5px;
   }
 `;
 
@@ -22,14 +23,13 @@ export const ProductImage = styled.img`
   object-fit: cover;
   background-size: cover;
   background-position: center;
+  border-radius: 2px;
 `;
 
-export const ProductName = styled.div`
-  margin: 0 1rem;
-  font-size: 1.2rem;
-  @media (max-width: 550px) {
-    font-size: 1rem;
-  }
+export const ProductName = styled.span`
+  margin: 0 5px;
+  font-size: 1rem;
+  text-align: left;
 `;
 
 export const CenterTableData = styled.div`
@@ -37,57 +37,17 @@ export const CenterTableData = styled.div`
   align-items: center;
   justify-content: center;
   & svg {
+    background-color: #1818180a;
     margin: 0 1rem;
-    font-size: 1.3rem;
+    font-size: 1.2rem;
     cursor: pointer;
-    opacity: 0.6;
+    border-radius: 10px;
+    color: #7c7c7c;
     @media (max-width: 440px) {
       margin: 0 5px;
-      font-size: 1.3rem;
+      font-size: 1rem;
       cursor: pointer;
       opacity: 0.6;
     }
   }
 `;
-
-/* td {
- 
-}
-.center_table-data {
-  
-}
-.center_table-data svg {
-  
-}
-
-.product_description {
-  
-}
-.product_name {
-  
-}
-
-@media screen and (max-width: 630px) {
-  td {
-    
-  }
-}
-
-@media screen and (max-width: 440px) {
-  .center_table-data svg {
-    
-  }
-  td {
-    
-  }
-}
-
-
-@media screen and (max-width: 550px) {
-  th {
-    padding: 0;
-  }
-  .product_name {
-    font-size: 1rem;
-  }
-} */
