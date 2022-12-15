@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { Route, Routes } from "react-router-dom";
 // redux imports
-import { fetchCategoriesAsync } from "../../store/categories/categories.action";
+import { fetchCategoriesStart } from "../../store/categories/categories.action";
 // components
 import "./shop.style.css";
 import CategoriesPreview from "../categories-preview/categories-preview.component";
@@ -14,7 +14,8 @@ const Shop = () => {
   // getting categories
   useEffect(() => {
     // to use async function in useEffect use separate function expression
-    dispatch(fetchCategoriesAsync());
+    // dispatch(fetchCategoriesAsync()); for thunk
+    dispatch(fetchCategoriesStart());
   }, []);
 
   return (

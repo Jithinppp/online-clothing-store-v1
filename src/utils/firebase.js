@@ -131,9 +131,9 @@ export const addCollectionAndDocument = async (
 };
 
 // for get/retrieve all categories data from firestore
-export const getCategoriesAndDocument = async () => {
+export const getCategoriesAndDocuments = async (category) => {
   // set the reference
-  const collectionRef = collection(db, "categories");
+  const collectionRef = collection(db, category);
   // make a query to the server with the reference
   const q = query(collectionRef);
   // after creating query get the snapshot or doc by the query as argument
