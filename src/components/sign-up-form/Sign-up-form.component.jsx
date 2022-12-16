@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // components
 import { SignUpContainer, SignUpFormWrapper } from "./sign-up-form.style";
@@ -9,11 +10,7 @@ import {
 } from "../../layouts/shared/Shared.js";
 import FormInput from "../form-input/Form-Input.component";
 
-// firebase utils
-import {
-  createAuthUserWithEmailAndPassword,
-  createUserDocumentFromAuth,
-} from "../../utils/firebase";
+import { signUpStart } from "../../store/user/user.action";
 
 // default state fields vars
 const defaultFormFields = {
@@ -24,6 +21,7 @@ const defaultFormFields = {
 };
 
 const SignUpForm = () => {
+  const dispatch = useDispatch();
   // state for form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { displayName, email, password, confirmPassword } = formFields;
@@ -45,18 +43,8 @@ const SignUpForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     if (password === confirmPassword && password.length >= 6) {
-      try {
-        const { user } = await createAuthUserWithEmailAndPassword(
-          email,
-          password
-        );
-        await createUserDocumentFromAuth(user, { displayName });
-        //  clearing inputs
-        clearInputs();
-      } catch (error) {
-        // error handling
-        console.log(error);
-      }
+      dispatch(signUpStart(email, password, displayName));
+      clearInputs();
     } else {
       alert("wrong credentials");
     }

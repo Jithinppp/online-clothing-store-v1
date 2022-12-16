@@ -72,7 +72,22 @@ export const signOutUser = async () => await signOut(auth);
 export const onAuthStateChangedListener = (callback) =>
   onAuthStateChanged(auth, callback);
 
-//? for firestore
+export const getCurrentUser = () => {
+  // we make a auth state promise for sagas it is a subscription based
+  return new Promise((resolve, reject) => {
+    // onAuthStateChanged gives a unsubscribe we have to call immediately in callback otherwise memory leak happens
+    const unsubscribe = onAuthStateChanged(
+      auth,
+      (userAuth) => {
+        unsubscribe();
+        resolve(userAuth);
+      },
+      reject
+    );
+  });
+};
+
+//! for firestore
 export const createUserDocumentFromAuth = async (
   userAuth,
   additionalData = {}
@@ -104,7 +119,7 @@ export const createUserDocumentFromAuth = async (
     }
   }
   // if user exist then return
-  return userDocRef;
+  return userSnapshot;
 };
 
 // uploading/add/create a data into firestore

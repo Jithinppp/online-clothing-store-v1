@@ -1,8 +1,9 @@
 import { all, call } from "redux-saga/effects";
-import { categoriesSaga } from "./categories/categories-saga";
+import { categoriesSaga } from "./categories/categories.saga";
+import { userSagas } from "./user/user.saga";
 
 export function* rootSaga() {
-  yield all([call(categoriesSaga)]);
+  yield all([call(categoriesSaga), call(userSagas)]);
 }
 
 /*
@@ -28,7 +29,7 @@ then resume the code or get executed code and it returns a object {value:undefin
 in the generator function we can call yield it basically behave like return keyword or resolve keyword
    function* gen(i){
       yield i;
-      yield i+10;
+      yield i+10; 
    }
    const res = gen(5)
    res.next() 

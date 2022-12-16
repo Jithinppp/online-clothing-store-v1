@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 // components
 import { SignInContainer, Separator, SignInFormWrapper } from "./sign-in.style";
@@ -10,12 +11,11 @@ import {
 } from "../../layouts/shared/Shared.js";
 import { ReactComponent as GoogleIcon } from "../../assets/images/1534129544.svg";
 import FormInput from "../form-input/Form-Input.component";
-
-// firebase utils
+// saga
 import {
-  signInAuthUserWithEmailAndPassword,
-  signInWithGooglePopup,
-} from "../../utils/firebase";
+  googleSignInStart,
+  emailSignInStart,
+} from "../../store/user/user.action";
 
 // default variables
 const defaultFormFields = {
@@ -24,6 +24,7 @@ const defaultFormFields = {
 };
 
 const SignInForm = () => {
+  const dispatch = useDispatch();
   // state for form fields
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
@@ -42,32 +43,16 @@ const SignInForm = () => {
   const submitHandler = async (e) => {
     e.preventDefault();
     try {
-      await signInAuthUserWithEmailAndPassword(email, password);
-      // clearing the inputs
+      dispatch(emailSignInStart(email, password));
       clearInputs();
     } catch (error) {
-      // handling the errors
-      switch (error.code) {
-        case "auth/user-not-found":
-          alert("user not found");
-          break;
-        case "auth/wrong-password":
-          alert("wrong password");
-          break;
-        default:
-          console.log(error);
-      }
+      console.log(error);
     }
   };
 
   // sign-in and create user with googlePopup
   const logGoogleUser = async () => {
-    try {
-      await signInWithGooglePopup();
-    } catch (error) {
-      // error handling
-      alert(error.code);
-    }
+    dispatch(googleSignInStart());
   };
 
   return (

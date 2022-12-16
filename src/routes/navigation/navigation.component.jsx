@@ -1,6 +1,6 @@
 import { Fragment } from "react";
 import { Outlet, Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // redux
 import { selectUser } from "../../store/user/user.selector";
@@ -12,14 +12,17 @@ import {
   NavItems,
   NavItem,
 } from "./navigation.styles";
-import { signOutUser } from "../../utils/firebase";
+// import { signOutUser } from "../../utils/firebase";
 import ShoppingBagIcon from "../../components/shopping-bag-icon/shopping-bag-icon.component";
 import CartDropdown from "../../components/cart-dropdown/cart-dropdown.component";
+import { signOutStart } from "../../store/user/user.action";
 
 const Navigation = (props) => {
+  const dispatch = useDispatch();
   const cartDropdown = useSelector(selectCartDropdown);
   // getting data from redux we pass a selector function for each items
   const currentUser = useSelector(selectUser);
+  const signOutUser = () => dispatch(signOutStart());
 
   return (
     <Fragment>
