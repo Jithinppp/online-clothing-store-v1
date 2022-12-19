@@ -1,16 +1,16 @@
 import styled from "styled-components";
 
 export const PaymentContainer = styled.div`
-  height: 300px;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 2rem;
 `;
 
 export const PaymentFormContainer = styled.form`
   height: 100px;
-  min-width: 500px;
+  width: 350px;
   margin: 10px;
   display: flex;
   flex-direction: column;

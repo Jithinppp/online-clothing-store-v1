@@ -12,6 +12,7 @@ import { selectCartItems } from "../../store/cart/cart.selector";
 import { BiX, BiPlus, BiMinus } from "react-icons/bi";
 import {
   CenterTableData,
+  ItemTableRow,
   ProductDescription,
   ProductImage,
   ProductName,
@@ -30,7 +31,7 @@ const CheckoutItem = ({ productData }) => {
     dispatch(removeItemFromCart(cartItems, productData));
 
   return (
-    <tr>
+    <ItemTableRow>
       <TableData>
         <ProductDescription>
           <ProductImage src={imageUrl} width={60} height={60} alt={name} />
@@ -55,7 +56,7 @@ const CheckoutItem = ({ productData }) => {
           {<BiX onClick={removeItemFromCartHandler} />}
         </CenterTableData>
       </TableData>
-    </tr>
+    </ItemTableRow>
   );
 };
 export default CheckoutItem;

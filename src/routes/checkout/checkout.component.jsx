@@ -10,6 +10,8 @@ import {
   CheckoutTableFoot,
   CheckoutTableHead,
   CheckoutTableHeadCell,
+  TableRowPrice,
+  TableRowTitles,
 } from "./checkout.style";
 import CheckoutItem from "../../components/checkout-item/checkout-item";
 import { useSelector } from "react-redux";
@@ -24,11 +26,12 @@ const Checkout = () => {
       <CheckoutTable>
         {/* headings */}
         <CheckoutTableHead>
-          <tr>
+          <TableRowTitles>
             <CheckoutTableHeadCell>Product</CheckoutTableHeadCell>
             <CheckoutTableHeadCell>Qty</CheckoutTableHeadCell>
             <CheckoutTableHeadCell>Price</CheckoutTableHeadCell>
-          </tr>
+            <CheckoutTableHeadCell></CheckoutTableHeadCell>
+          </TableRowTitles>
         </CheckoutTableHead>
         {/* contents */}
         <tbody>
@@ -37,11 +40,12 @@ const Checkout = () => {
           ))}
         </tbody>
         <CheckoutTableFoot>
-          <tr>
+          <TableRowPrice>
             <CheckoutTableHeadCell>Total</CheckoutTableHeadCell>
             <CheckoutTableHeadCell></CheckoutTableHeadCell>
             <CheckoutTableHeadCell>{totalPrice}₹</CheckoutTableHeadCell>
-          </tr>
+            <CheckoutTableHeadCell></CheckoutTableHeadCell>
+          </TableRowPrice>
         </CheckoutTableFoot>
       </CheckoutTable>
       <PaymentForm />

@@ -6,7 +6,7 @@
 body {
   font-family: "Outfit", sans-serif;
   color: rgb(62, 62, 62);
-  padding: 0 0.5rem;
+  padding: 0 0.2rem;
 }
 ::-webkit-scrollbar {
   width: 3px;

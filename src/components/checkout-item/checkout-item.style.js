@@ -1,5 +1,9 @@
 import styled from "styled-components";
 
+export const ItemTableRow = styled.tr`
+  /* border-spacing: 1rem; */
+`;
+
 export const TableData = styled.td`
   /* td */
   font-weight: 300;
