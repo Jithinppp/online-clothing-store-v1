@@ -26,7 +26,7 @@ const ProductCard = ({ productData }) => {
       <ProductCardImage src={imageUrl} alt={name} />
       <ProductTitle>{name}</ProductTitle>
       <ButtonPriceContainer>
-        <ProductPrice>{price}$</ProductPrice>
+        <ProductPrice>{price}₹</ProductPrice>
         <LightBtnSecondary onClick={addItemToCartHandler}>
           Add to cart
         </LightBtnSecondary>

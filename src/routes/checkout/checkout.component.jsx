@@ -13,6 +13,7 @@ import {
 } from "./checkout.style";
 import CheckoutItem from "../../components/checkout-item/checkout-item";
 import { useSelector } from "react-redux";
+import PaymentForm from "../../components/payment-form/payment-form.component";
 
 const Checkout = () => {
   const cartItems = useSelector(selectCartItems);
@@ -39,10 +40,11 @@ const Checkout = () => {
           <tr>
             <CheckoutTableHeadCell>Total</CheckoutTableHeadCell>
             <CheckoutTableHeadCell></CheckoutTableHeadCell>
-            <CheckoutTableHeadCell>{totalPrice}$</CheckoutTableHeadCell>
+            <CheckoutTableHeadCell>{totalPrice}₹</CheckoutTableHeadCell>
           </tr>
         </CheckoutTableFoot>
       </CheckoutTable>
+      <PaymentForm />
     </CheckoutContainer>
   );
 };

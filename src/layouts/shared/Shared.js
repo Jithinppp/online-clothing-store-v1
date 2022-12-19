@@ -8,6 +8,12 @@ export const MainTitle = styled.h1`
   margin: 0;
 `;
 
+export const SubTitle = styled.h3`
+  font-weight: 400;
+  font-size: 1.1rem;
+  margin: 0;
+`;
+
 export const LightSubtitle = styled.p`
   margin: 7px 0;
   opacity: 0.7;
@@ -19,13 +25,13 @@ export const LightBtnPrimary = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 1rem;
+  font-size: 1.1rem;
   width: 270px;
   margin: 15px 0;
   background-color: #fff;
   outline: none;
   border: none;
-  padding: 10px;
+  padding: 8px 10px;
   border-radius: 5px;
   box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px,
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;

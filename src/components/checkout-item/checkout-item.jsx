@@ -47,7 +47,7 @@ const CheckoutItem = ({ productData }) => {
         </CenterTableData>
       </TableData>
       <TableData>
-        <CenterTableData>{price}$</CenterTableData>
+        <CenterTableData>{price}₹</CenterTableData>
       </TableData>
       <TableData>
         <CenterTableData>
